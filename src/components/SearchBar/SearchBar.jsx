@@ -3,7 +3,7 @@ import React from 'react'
 const SearchBar = () => {
   return (
     <div>
-      <form class={`flex items-center justify-end h-[40px] w-full `}>
+      <form class={`flex items-center  h-[40px] w-full `}>
           <div className="relative">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

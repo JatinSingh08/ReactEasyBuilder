@@ -2,14 +2,6 @@ import React from "react";
 import "./Editor.css";
 import { Button, Dropdown, EditorCanvas, SearchBar, Settings, Table, TextInput } from "./components";
 
-// const EditorCanvas = (props) => {
-//   return (
-//     <div className="editor-canvas">
-//       <h4> Put the drag and drop interface over here! </h4>
-//     </div>
-//   );
-// };
-
 const buttonTypes = ['button', 'input', 'dropdown', 'table'];
 const EditorPicker = (props) => {
   return (
