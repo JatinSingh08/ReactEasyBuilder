@@ -1,0 +1,28 @@
+.editor {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative; /* Added */
+}
+
+.editor-canvas {
+  width: calc(100% - 350px);
+  background-color: #E9EFF2;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editor-picker {
+  padding: 20px;
+  width: 350px;
+  /* border-left: 1px solid black; */
+  background: #F9FBFC 0% 0% no-repeat padding-box;
+  box-shadow: 1px 1px 1px #00000029;
+  opacity: 1;
+  height: 100vh;
+  position: fixed; /* Added */
+  top: 0; /* Added */
+  right: 0; /* Added */
+}
