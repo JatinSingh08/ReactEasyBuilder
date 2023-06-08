@@ -15,7 +15,7 @@ const CanvasProvider = ({children}) => {
   const saveElementsToLocalStorage = (elements) => {
     localStorage.setItem('canvasElements', JSON.stringify(elements));
   };
-
+  
   useEffect(() => {
     saveElementsToLocalStorage(elementsRef.current);
   }, [elementsRef.current]);
@@ -83,7 +83,6 @@ const CanvasProvider = ({children}) => {
     elementsRef.current = updatedElements;
     dispatch({ type: ActionType.SET_ELEMENTS, payload: updatedElements });
   };
-  
   return (
     <CanvasContext.Provider
     value={{

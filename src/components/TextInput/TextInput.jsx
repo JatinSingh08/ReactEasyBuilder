@@ -9,7 +9,7 @@ const TextInput = ({type}) => {
     onClick={() => addElement({type: 'textInput'})}
     
     >
-      <div className='min-w-[64px] w-16 h-16 bg-[#FFFFFF] drop-shadow-lg shadow-[#A0B8C789] rounded flex items-center justify-center font-medium'>
+      <div className='min-w-[64px] w-16 h-16 bg-[#FFFFFF] drop-shadow-lg shadow-[#A0B8C789] rounded flex items-center justify-center font-bold'>
         Aa
       </div>
       <div className='text-start'>

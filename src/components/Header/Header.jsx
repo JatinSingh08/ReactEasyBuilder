@@ -10,7 +10,7 @@ const Header = () => {
               Design Board
 
             </span>
-            <span className='text-[#ACB0BC]'> (Draft)</span>
+            <span className='text-[#ACB0BC] text-[20px]'> (Draft)</span>
           </p>
         </div>
       </header>

@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
-import '../../Editor.css'
+import "../../Editor.css";
 import { useCanvas } from "../../context/canvas-context";
 import ButtonComponent from "../CanvasComponents/ButtonComponent";
 import InputComponent from "../CanvasComponents/InputComponent";
@@ -11,12 +11,43 @@ import TableComponent from "../CanvasComponents/TableComponent";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const EditorCanvas = () => {
-  const { state: {elements, componentType}, dispatch, updateElementsPosition } = useCanvas();
+  const { state: { elements, componentType }, dispatch, updateElementsPosition } = useCanvas();
   const previousSizeRef = useRef({});
 
-  const gridItemWidth = 25; 
-  const gridItemHeight = 25; 
-  const gridCols = 12; 
+  const gridItemWidth = 25;
+  const gridItemHeight = 25;
+  const gridCols = 12;
+
+  const [showGrid, setShowGrid] = useState(false);
+
+  const handleDragStart = () => {
+    setShowGrid(true);
+  };
+
+  const handleDragStop = (layout, oldItem, newItem) => {
+    const updatedElements = elements.map((element) => {
+      const matchingLayout = layout.find((item) => item.i === element.i);
+      if (matchingLayout) {
+        const { x, y, w, h } = matchingLayout;
+        // const newX = Math.round(x / gridItemWidth);
+        // const newY = Math.round(y / gridItemHeight);
+        const previousElement = elements.find((item) => item.i === element.i);
+
+        const newX = Math.max(0, Math.min(matchingLayout.x, gridCols - w));
+        const newY = matchingLayout.y;
+        return {
+          ...element,
+          x: previousElement.x,
+          y: previousElement.y,
+          w: Math.round(w),
+          h,
+        };
+      }
+      return element;
+    });
+    updateElementsPosition(updatedElements);
+    setShowGrid(false);
+  };
 
   const handleDrag = (layout) => {
     const updatedElements = elements.map((element) => {
@@ -32,30 +63,11 @@ const EditorCanvas = () => {
     });
     updateElementsPosition(updatedElements);
   };
-  
-  // const handleDrag = (layout) => {
-  //   const updatedElements = elements.map((element) => {
-  //     const matchingLayout = layout.find((item) => item.i === element.i);
-  //     if (matchingLayout) {
-  //       const { w, h } = matchingLayout;
-  //       const previousSize = previousSizeRef.current[element.i] || {};
-  //       const updatedElement = {
-  //         ...element,
-  //         x: matchingLayout.x,
-  //         y: matchingLayout.y,
-  //         w,
-  //         h,
-  //         prevW: previousSize.w || w, // Store previous width
-  //         prevH: previousSize.h || h, // Store previous height
-  //       };
-  //       previousSizeRef.current[element.i] = { w, h };
-  //       return updatedElement;
-  //     }
-  //     return element;
-  //   });
-  //   updateElementsPosition(updatedElements);
-  // };
-  
+
+  const handleResizeStart = () => {
+    setShowGrid(true);
+  };
+
   const handleResizeStop = (layout, oldItem, newItem) => {
     const updatedElements = elements.map((element) => {
       if (element.i === newItem.i) {
@@ -65,8 +77,8 @@ const EditorCanvas = () => {
           ...element,
           w,
           h,
-          prevW: previousSize.w || w, // Store previous width
-          prevH: previousSize.h || h, // Store previous height
+          prevW: previousSize.w || w,
+          prevH: previousSize.h || h,
         };
         previousSizeRef.current[element.i] = { w, h };
         return updatedElement;
@@ -74,32 +86,36 @@ const EditorCanvas = () => {
       return element;
     });
     updateElementsPosition(updatedElements);
+    setShowGrid(false);
   };
-  
+
+
 
   return (
-    <div className="editor-canvas scrollbar-theme">
-      {
-        elements.length === 0 && (
-            <h1 className=" absolute top-[55%] left-[30%] text-center text-[#c2cdd1] text-2xl font-bold">Drag & drop components here.</h1>
-        )
-      }
+    <div className="editor-canvas scrollbar-theme" >
+      {elements.length === 0 && (
+        <h1 className="absolute top-[55%] left-[30%] text-center text-[#c2cdd1] text-2xl font-bold">
+          Drag & drop components here.
+        </h1>
+      )}
       <ResponsiveGridLayout
         className="layout"
         layouts={{ xxs: elements }}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        // cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
         cols={{ lg: gridCols, md: gridCols, sm: gridCols, xs: gridCols, xxs: gridCols }}
         isResizable={{
           x: true,
-          y: componentType === 'textInput' ? false : true
+          y: componentType === "textInput" ? false : true,
         }}
         preventCollision={false}
         rowHeight={gridItemHeight}
-        compactType='none'
-        margin={[0, 0]} 
-        containerPadding={[0, 0]} 
+        compactType="none"
+        margin={[0, 0]}
+        containerPadding={[0, 0]}
+        onDragStart={handleDragStart}
+        onDragStop={handleDragStop}
         onDrag={handleDrag}
+        onResizeStart={handleResizeStart}
         onResizeStop={handleResizeStop}
       >
         {elements.map((item) => (
@@ -117,13 +133,28 @@ const EditorCanvas = () => {
               height: `${item.h * gridItemHeight}px`,
             }}
           >
-            {item.component === 'button' && <ButtonComponent />}
-            {item.component === 'textInput' && <InputComponent />}
-            {item.component === 'dropdown' && <DropdownComponent />}
-            {item.component === 'table' && <TableComponent />}
+            {item.component === "button" && <ButtonComponent />}
+            {item.component === "textInput" && <InputComponent />}
+            {item.component === "dropdown" && <DropdownComponent />}
+            {item.component === "table" && <TableComponent />}
           </div>
         ))}
       </ResponsiveGridLayout>
+      {showGrid && (
+        <div className="grid-overlay">
+          <table className="grid-table">
+            <tbody>
+              {[...Array(25)].map((_, rowIndex) => (
+                <tr key={rowIndex}>
+                  {[...Array(12)].map((_, colIndex) => (
+                    <td key={colIndex} className="grid-cell"></td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

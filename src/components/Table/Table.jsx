@@ -9,8 +9,8 @@ const Table = ({ type }) => {
     onClick={() => addElement({ type: 'table' })}
     >
       <div className="min-w-[64px] w-16 h-16 bg-[#FFFFFF] drop-shadow-lg shadow-[#A0B8C789] rounded flex items-center justify-center font-medium">
-        <div className="rounded flex items-center justify-center">
-          <AiOutlineTable />
+        <div className="rounded flex items-center justify-center text-[#8A9097]">
+          <AiOutlineTable className="w-6 h-6"/>
         </div>
       </div>
       <div className="text-start">

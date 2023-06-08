@@ -8,7 +8,7 @@ const Dropdown = ({type}) => {
     onClick={() => addElement({type: 'dropdown'})}
     >
       <div className='min-w-[64px] w-16 h-16 bg-[#FFFFFF] drop-shadow-lg shadow-[#A0B8C789] rounded flex items-center justify-center font-medium'>
-        <div className='w-4 h-4 bg-slate-900 text-slate-100 rounded flex items-center justify-center'>
+        <div className='w-5 h-5 bg-slate-900 text-slate-100 rounded flex items-center justify-center'>
           <BiChevronDown/>
         </div>
       </div>

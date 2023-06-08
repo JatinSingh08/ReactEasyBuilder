@@ -3,7 +3,7 @@ import { BiChevronDown } from 'react-icons/bi'
 import { AiOutlineCaretRight } from 'react-icons/ai'
 const Settings = () => {
   return (
-    <div className='flex gap-4 text-end h-10'>
+    <div className='flex gap-4 text-end h-10 cursor-pointer'>
       <div className='flex items-center justify-center'>
         <h1>81.2%</h1>
         <BiChevronDown />
