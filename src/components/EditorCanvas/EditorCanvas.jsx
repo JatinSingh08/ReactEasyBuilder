@@ -21,10 +21,14 @@ const EditorCanvas = () => {
 
   return (
     <div className="editor-canvas">
-
+{/* position: absolute;
+  top: 55%;
+  left: 42%;
+  transform: translate(-50%, -50%);
+  text-align: center; */}
       {
         elements.length === 0 && (
-            <h1 className="empty-layout-text">Drag & drop components here.</h1>
+            <h1 className=" absolute top-[55%] left-[30%] text-center text-[#c2cdd1] text-2xl font-bold">Drag & drop components here.</h1>
         )
       }
       <ResponsiveGridLayout

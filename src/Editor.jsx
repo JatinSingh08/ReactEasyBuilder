@@ -9,7 +9,7 @@ const EditorPicker = (props) => {
       <div className="flex items-end justify-end w-full">
         <Settings />
       </div>
-      <div className="flex flex-col items-start mt-4 gap-4">
+      <div className="flex flex-col items-start mt-10 gap-4">
         <div className="flex w-full">
           <SearchBar />
         </div>

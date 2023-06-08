@@ -10,6 +10,33 @@ const CanvasContext = createContext();
 const CanvasProvider = ({children}) => {
   const [state, dispatch] = useReducer(CanvasReducer, initialState);
 
+  const getComponentWidth = ( type ) => {
+    switch (type) {
+      case 'textInput':
+       return 3;
+        break;
+      default: 
+        return 2;
+        break;
+    }
+  }
+
+  const getComponentHeight = (type) => {
+    switch (type) {
+      case 'textInput':
+       return 2;
+        break;
+      case 'table':
+        return 4;
+        break;
+      case 'button':
+        return 2;
+        break;
+      default:
+        return 1;
+        break;
+    }
+  }
 
   const addElement = ({type}) => {
     let newComponent = null;
@@ -33,8 +60,8 @@ const CanvasProvider = ({children}) => {
       i: `element-${state.elements.length + 1}`,
       x: 0,
       y: 0,
-      w: 2,
-      h: type === 'textInput' ? 4 : 'table' ? 4 : 1,
+      w: getComponentWidth(type),
+      h: getComponentHeight(type),
       component: newComponent
     }
     dispatch({ type: ActionType.SET_COMPONENT_TYPE, payload: type})

@@ -11,7 +11,7 @@ const DropdownComponent = () => {
           </div>
         </Option>
         <Option>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center bg-slate-100">
             <span className="label-text">Material Tailwind React</span>
           </div>
         </Option>
