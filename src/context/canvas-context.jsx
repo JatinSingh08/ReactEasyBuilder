@@ -47,31 +47,47 @@ const CanvasProvider = ({children}) => {
         break;
     }
   }
-
-  const addElement = ({type}) => {
-    let newComponent = null;
+  const getDefaultText = (type) => {
     switch (type) {
       case 'button':
-        newComponent = <ButtonComponent />
+        return 'Button';
         break;
       case 'textInput':
-        newComponent = <InputComponent />
+        return 'Label'
+      case 'dropdown':
+        return 'Select Version'
+      default:
         break;
-      case 'dropdown': 
-        newComponent = <DropdownComponent />
+    }
+  }
+  const getDefaultBorderRadius = (type) => {
+    switch (type) {
+      case 'button':
+        return 8;
+        break;
+      case 'textInput':
+        return 8;
+        break;
+      case 'dropdown':
+        return 0;
         break;
       case 'table':
-        newComponent = <TableComponent />
+        return 0;
         break;
       default:
         break;
     }
+  }
+
+  const addElement = ({type}) => {
     const newElement = {
       i: `element-${state.elements.length + 1}`,
       x: 0,
       y: 0,
       w: getComponentWidth(type),
       h: getComponentHeight(type),
+      text: getDefaultText(type),
+      borderRadius: getDefaultBorderRadius(type),
       component: type
     }
     dispatch({ type: ActionType.SET_COMPONENT_TYPE, payload: type})
@@ -83,13 +99,27 @@ const CanvasProvider = ({children}) => {
     elementsRef.current = updatedElements;
     dispatch({ type: ActionType.SET_ELEMENTS, payload: updatedElements });
   };
+
+  // console.log("selectedComponent", state.selectedElement);
+
+  const updateElement = (updatedElement) => {
+    const updatedElements = state.elements.map((element) => {
+      if(element.i === updatedElement.i) {
+        return updatedElement;
+      }
+      return element;
+    })
+    dispatch({ type: ActionType.SET_ELEMENTS, payload: updatedElements})
+  }
+
   return (
     <CanvasContext.Provider
     value={{
       state,
       dispatch,
       addElement,
-      updateElementsPosition
+      updateElementsPosition,
+      updateElement
     }}
     >
       {children}

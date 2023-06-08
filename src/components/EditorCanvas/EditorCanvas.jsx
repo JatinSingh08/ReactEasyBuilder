@@ -8,6 +8,7 @@ import ButtonComponent from "../CanvasComponents/ButtonComponent";
 import InputComponent from "../CanvasComponents/InputComponent";
 import DropdownComponent from "../CanvasComponents/DropdownComponent";
 import TableComponent from "../CanvasComponents/TableComponent";
+import { ActionType } from "../../reducers/constants";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const EditorCanvas = () => {
@@ -89,12 +90,19 @@ const EditorCanvas = () => {
     setShowGrid(false);
   };
 
-
+  const elementClickHandler = (id) => {
+    setShowGrid(false);
+    console.log('id', id);
+    console.log('elements', elements);
+    const selectedElement = elements.find(element => element.i === id);
+    console.log('selected Element', selectedElement);
+    dispatch({ type: ActionType.SELECT_ELEMENT, payload: selectedElement});
+  }
 
   return (
     <div className="editor-canvas scrollbar-theme" >
       {elements.length === 0 && (
-        <h1 className="absolute top-[55%] left-[30%] text-center text-[#c2cdd1] text-2xl font-bold">
+        <h1 className="absolute top-[45%] left-[40%] text-center text-[#c2cdd1] text-2xl font-bold">
           Drag & drop components here.
         </h1>
       )}
@@ -117,6 +125,7 @@ const EditorCanvas = () => {
         onDrag={handleDrag}
         onResizeStart={handleResizeStart}
         onResizeStop={handleResizeStop}
+        
       >
         {elements.map((item) => (
           <div
@@ -132,6 +141,7 @@ const EditorCanvas = () => {
               width: `${item.w * gridItemWidth}px`,
               height: `${item.h * gridItemHeight}px`,
             }}
+            onClick={() => elementClickHandler(item.i)}
           >
             {item.component === "button" && <ButtonComponent />}
             {item.component === "textInput" && <InputComponent />}
@@ -144,7 +154,7 @@ const EditorCanvas = () => {
         <div className="grid-overlay">
           <table className="grid-table">
             <tbody>
-              {[...Array(25)].map((_, rowIndex) => (
+              {[...Array(50)].map((_, rowIndex) => (
                 <tr key={rowIndex}>
                   {[...Array(12)].map((_, colIndex) => (
                     <td key={colIndex} className="grid-cell"></td>

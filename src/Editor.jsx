@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Editor.css";
-import { Button, Dropdown, EditorCanvas, SearchBar, Settings, Table, TextInput } from "./components";
+import { Button, Dropdown, EditorCanvas, PropertiesPanel, SearchBar, Settings, Table, TextInput } from "./components";
+import { useCanvas } from "./context/canvas-context";
+import { ActionType } from "./reducers/constants";
 
 const buttonTypes = ['button', 'input', 'dropdown', 'table'];
 const EditorPicker = (props) => {
+  const { state ,dispatch, updateElement } = useCanvas();
+  const [editorPicker, setEditorPicker] = useState('components');
   return (
     <div className="editor-picker flex flex-col gap-4 ">
       <div className="flex items-end justify-end w-full">
@@ -13,12 +17,31 @@ const EditorPicker = (props) => {
         <div className="flex w-full border border-[#D9E0E6] rounded-md">
           <SearchBar />
         </div>
-          
-        <h2 className="text-[#707880]">Components</h2>
-        <TextInput />
-        <Button />
-        <Dropdown />
-        <Table />
+        <div className="flex gap-6">
+          <button className="text-[#707880] font-normal transition-all duration-75 ease-in-out hover:text-[#55606b] hover:font-medium"
+          onClick={() => setEditorPicker('components')}
+          >Components</button>
+          <button className="text-[#707880] font-normal transition-all duration-75 ease-in-out hover:text-[#55606b] hover:font-medium"
+          onClick={() => setEditorPicker('properties')}
+          >Properties</button>
+
+        </div>
+        {
+          editorPicker === 'components' ?
+          (
+            <>
+              <TextInput />
+              <Button />
+              <Dropdown />
+              <Table />
+            </>
+          ) : (
+            <PropertiesPanel
+            selectedElement={state.selectedElement}
+            updateElement={updateElement}
+            />
+          )
+        }
 
       </div>
     </div>

@@ -3,7 +3,8 @@ import { ActionType } from '../constants';
 
 const initialState = {
   comopnentType: '',
-  elements: JSON.parse(localStorage.getItem('canvasElements')) || []
+  elements: JSON.parse(localStorage.getItem('canvasElements')) || [],
+  selectedElement: {}
 }
 const CanvasReducer = (state, action) => {
   switch (action.type) {
@@ -21,6 +22,11 @@ const CanvasReducer = (state, action) => {
       return {
         ...state,
         elements: action.payload
+      }
+    case ActionType.SELECT_ELEMENT:
+      return {
+        ...state,
+        selectedElement: action.payload
       }
 
   }

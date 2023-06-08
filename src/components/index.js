@@ -6,3 +6,4 @@ export { default as Table } from './Table/Table.jsx'
 export { default as EditorCanvas } from './EditorCanvas/EditorCanvas.jsx';
 export { default as Header } from './Header/Header.jsx';
 export { default as Settings } from './Settings/Settings.jsx';
+export { default as PropertiesPanel } from './PropertiesPanel/PropertiesPanel.jsx';
