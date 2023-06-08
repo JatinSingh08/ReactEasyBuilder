@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react'
+import React, { createContext, useContext, useEffect, useReducer, useRef } from 'react'
 import { CanvasReducer, initialState } from '../reducers/CanvasReducer/CanvasReducer';
 import { ActionType } from '../reducers/constants';
 import ButtonComponent from '../components/CanvasComponents/ButtonComponent';
@@ -9,6 +9,16 @@ import TableComponent from '../components/CanvasComponents/TableComponent';
 const CanvasContext = createContext();
 const CanvasProvider = ({children}) => {
   const [state, dispatch] = useReducer(CanvasReducer, initialState);
+  const elementsRef = useRef(state.elements);
+
+
+  const saveElementsToLocalStorage = (elements) => {
+    localStorage.setItem('canvasElements', JSON.stringify(elements));
+  };
+
+  useEffect(() => {
+    saveElementsToLocalStorage(elementsRef.current);
+  }, [elementsRef.current]);
 
   const getComponentWidth = ( type ) => {
     switch (type) {
@@ -62,18 +72,25 @@ const CanvasProvider = ({children}) => {
       y: 0,
       w: getComponentWidth(type),
       h: getComponentHeight(type),
-      component: newComponent
+      component: type
     }
     dispatch({ type: ActionType.SET_COMPONENT_TYPE, payload: type})
     dispatch({ type: ActionType.ADD_ELEMENT, payload: newElement});
+    saveElementsToLocalStorage([...elementsRef.current, newElement]);
   }
 
+  const updateElementsPosition = (updatedElements) => {
+    elementsRef.current = updatedElements;
+    dispatch({ type: ActionType.SET_ELEMENTS, payload: updatedElements });
+  };
+  
   return (
     <CanvasContext.Provider
     value={{
       state,
       dispatch,
-      addElement
+      addElement,
+      updateElementsPosition
     }}
     >
       {children}

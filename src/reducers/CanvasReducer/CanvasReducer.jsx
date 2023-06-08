@@ -3,11 +3,7 @@ import { ActionType } from '../constants';
 
 const initialState = {
   comopnentType: '',
-  elements: [
-    // { i: "a", x: 0, y: 0, w: 1, h: 2 },
-    // { i: "b", x: 1, y: 0, w: 3, h: 2 },
-    // { i: "c", x: 4, y: 0, w: 1, h: 2 },
-  ]
+  elements: JSON.parse(localStorage.getItem('canvasElements')) || []
 }
 const CanvasReducer = (state, action) => {
   switch (action.type) {
@@ -20,6 +16,11 @@ const CanvasReducer = (state, action) => {
       return {
         ...state,
         comopnentType: action.payload
+      }
+    case ActionType.SET_ELEMENTS: 
+      return {
+        ...state,
+        elements: action.payload
       }
 
   }

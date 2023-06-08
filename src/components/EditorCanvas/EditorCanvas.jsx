@@ -1,31 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import '../../Editor.css'
 import { useCanvas } from "../../context/canvas-context";
+import ButtonComponent from "../CanvasComponents/ButtonComponent";
+import InputComponent from "../CanvasComponents/InputComponent";
+import DropdownComponent from "../CanvasComponents/DropdownComponent";
+import TableComponent from "../CanvasComponents/TableComponent";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const EditorCanvas = () => {
-  const { state: {elements, componentType}, dispatch } = useCanvas();
+  const { state: {elements, componentType}, dispatch, updateElementsPosition } = useCanvas();
 
-  const gridItemWidth = 25; // Width of each grid item in pixels
-  const gridItemHeight = 25; // Height of each grid item in pixels
-
-  // const onLayoutChange = (newLayout) => {
-
-  //   setLayout(newLayout);
-  // }
-  const gridCols = 12; // Number of columns in the grid
-
+  const gridItemWidth = 25; 
+  const gridItemHeight = 25; 
+  const gridCols = 12; 
+  
+  const handleDrag = (layout) => {
+    const updatedElements = elements.map((element) => {
+      const matchingLayout = layout.find((item) => item.i === element.i);
+      if (matchingLayout) {
+        return {
+          ...element,
+          x: matchingLayout.x,
+          y: matchingLayout.y,
+        };
+      }
+      return element;
+    });
+    updateElementsPosition(updatedElements);
+  };
+  
 
   return (
     <div className="editor-canvas scrollbar-theme">
-{/* position: absolute;
-  top: 55%;
-  left: 42%;
-  transform: translate(-50%, -50%);
-  text-align: center; */}
       {
         elements.length === 0 && (
             <h1 className=" absolute top-[55%] left-[30%] text-center text-[#c2cdd1] text-2xl font-bold">Drag & drop components here.</h1>
@@ -46,7 +55,7 @@ const EditorCanvas = () => {
         compactType='none'
         margin={[0, 0]} // Set margin to zero to eliminate gaps between grid items
         containerPadding={[0, 0]} // Set container padding to zero
-        // onLayoutChange={onLayoutChange}
+        onDrag={handleDrag}
       >
         {elements.map((item) => (
           <div
@@ -63,7 +72,10 @@ const EditorCanvas = () => {
               height: `${item.h * gridItemHeight}px`,
             }}
           >
-            {item.component ? item.component : item.i}
+            {item.component === 'button' && <ButtonComponent />}
+            {item.component === 'textInput' && <InputComponent />}
+            {item.component === 'dropdown' && <DropdownComponent />}
+            {item.component === 'table' && <TableComponent />}
           </div>
         ))}
       </ResponsiveGridLayout>
