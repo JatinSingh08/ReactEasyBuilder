@@ -16,12 +16,27 @@
 
 .editor-canvas {
   margin-top: 100px;
-  width: 100%; 
+  width: calc(100% - 350px); 
   background-color: #E9EFF2;
   display: flex;
   align-items: flex-start; 
   justify-content: flex-start; 
-  overflow: auto; 
+  overflow: scroll; 
+  overflow-x: hidden;
+}
+.scrollbar-theme::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-theme::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.scrollbar-theme::-webkit-scrollbar-thumb {
+  background: #9767ff;
+  border-radius: 20px;
+}
+
+.scrollbar-theme::-webkit-scrollbar-corner {
+  background: #f1f1f1;
 }
 
  .grid__item {

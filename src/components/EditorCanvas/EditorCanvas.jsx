@@ -20,7 +20,7 @@ const EditorCanvas = () => {
 
 
   return (
-    <div className="editor-canvas">
+    <div className="editor-canvas scrollbar-theme">
 {/* position: absolute;
   top: 55%;
   left: 42%;
