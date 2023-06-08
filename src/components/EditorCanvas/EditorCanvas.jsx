@@ -12,11 +12,12 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const EditorCanvas = () => {
   const { state: {elements, componentType}, dispatch, updateElementsPosition } = useCanvas();
+  const previousSizeRef = useRef({});
 
   const gridItemWidth = 25; 
   const gridItemHeight = 25; 
   const gridCols = 12; 
-  
+
   const handleDrag = (layout) => {
     const updatedElements = elements.map((element) => {
       const matchingLayout = layout.find((item) => item.i === element.i);
@@ -26,6 +27,49 @@ const EditorCanvas = () => {
           x: matchingLayout.x,
           y: matchingLayout.y,
         };
+      }
+      return element;
+    });
+    updateElementsPosition(updatedElements);
+  };
+  
+  // const handleDrag = (layout) => {
+  //   const updatedElements = elements.map((element) => {
+  //     const matchingLayout = layout.find((item) => item.i === element.i);
+  //     if (matchingLayout) {
+  //       const { w, h } = matchingLayout;
+  //       const previousSize = previousSizeRef.current[element.i] || {};
+  //       const updatedElement = {
+  //         ...element,
+  //         x: matchingLayout.x,
+  //         y: matchingLayout.y,
+  //         w,
+  //         h,
+  //         prevW: previousSize.w || w, // Store previous width
+  //         prevH: previousSize.h || h, // Store previous height
+  //       };
+  //       previousSizeRef.current[element.i] = { w, h };
+  //       return updatedElement;
+  //     }
+  //     return element;
+  //   });
+  //   updateElementsPosition(updatedElements);
+  // };
+  
+  const handleResizeStop = (layout, oldItem, newItem) => {
+    const updatedElements = elements.map((element) => {
+      if (element.i === newItem.i) {
+        const { w, h } = newItem;
+        const previousSize = previousSizeRef.current[element.i] || {};
+        const updatedElement = {
+          ...element,
+          w,
+          h,
+          prevW: previousSize.w || w, // Store previous width
+          prevH: previousSize.h || h, // Store previous height
+        };
+        previousSizeRef.current[element.i] = { w, h };
+        return updatedElement;
       }
       return element;
     });
@@ -53,9 +97,10 @@ const EditorCanvas = () => {
         preventCollision={false}
         rowHeight={gridItemHeight}
         compactType='none'
-        margin={[0, 0]} // Set margin to zero to eliminate gaps between grid items
-        containerPadding={[0, 0]} // Set container padding to zero
+        margin={[0, 0]} 
+        containerPadding={[0, 0]} 
         onDrag={handleDrag}
+        onResizeStop={handleResizeStop}
       >
         {elements.map((item) => (
           <div
