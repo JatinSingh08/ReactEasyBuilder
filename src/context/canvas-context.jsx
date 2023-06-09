@@ -110,8 +110,7 @@ const CanvasProvider = ({ children }) => {
       default:
         break;
     }
-
-    dispatch({ type: ActionType.SET_COMPONENT_TYPE, payload: type });
+    
     dispatch({ type: ActionType.ADD_ELEMENT, payload: newElement });
     saveElementsToLocalStorage([...elementsRef.current, newElement]);
   };

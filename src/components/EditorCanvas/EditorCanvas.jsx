@@ -132,6 +132,9 @@ const EditorCanvas = () => {
         onDrag={handleDrag}
         onResizeStart={handleResizeStart}
         onResizeStop={handleResizeStop}
+        style={{
+          width: "100%",
+        }}
       >
         {elements.map((item) => (
           <div
@@ -149,18 +152,14 @@ const EditorCanvas = () => {
             }}
             onClick={() => elementClickHandler(item.i)}
           >
-            {item.component === "button" && (
-              <ButtonComponent element={item} />
-            )}
+            {item.component === "button" && <ButtonComponent element={item} />}
             {item.component === "textInput" && (
               <InputComponent element={item} />
             )}
             {item.component === "dropdown" && (
               <DropdownComponent element={item} />
             )}
-            {item.component === "table" && (
-              <TableComponent element={item} />
-            )}
+            {item.component === "table" && <TableComponent element={item} />}
           </div>
         ))}
       </ResponsiveGridLayout>

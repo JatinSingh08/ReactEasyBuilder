@@ -2,18 +2,52 @@
   width: 100%;
   height: 100%;
   display: flex;
-  position: relative; 
+  position: relative;
 }
 
 .editor-canvas {
   margin-top: 100px;
-  width: calc(100% - 350px); 
-  background-color: #E9EFF2;
+  width: calc(100% - 350px);
+  background-color: #e9eff2;
   display: flex;
-  align-items: flex-start; 
-  justify-content: flex-start; 
-  overflow: scroll; 
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: scroll;
   overflow-x: hidden;
+}
+
+.editor-canvas {
+  position: relative;
+}
+
+.grid__item {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  justify-content: center;
+  font-size: 16px;
+  margin: 10px;
+  overflow: visible;
+  min-width: 30px;
+  min-height: 25px;
+}
+
+.label-text {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+.editor-picker {
+  padding: 20px;
+  width: 350px;
+  background: #f9fbfc 0% 0% no-repeat padding-box;
+  box-shadow: 1px 1px 1px #00000029;
+  opacity: 1;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
 }
 
 .grid-overlay {
@@ -40,16 +74,40 @@
   border: 1px dotted rgba(0, 0, 0, 0.3);
 }
 
-.editor-canvas {
-  position: relative;
+.btn-theme {
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btn-theme:hover {
+  box-shadow: 0px 4px 0px -2px rgba(50, 50, 93, 0.25),
+    0px 0px 0px 0px rgba(0, 0, 0, 0.3);
+  transform: scale(1.03);
+}
+
+.layout {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    width: 90%;
+  }
+}
+@media (max-width: 480px) {
+  .layout {
+    width: 80%;
+  }
 }
 
 .scrollbar-theme::-webkit-scrollbar {
   width: 6px;
 }
+
 .scrollbar-theme::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
+
 .scrollbar-theme::-webkit-scrollbar-thumb {
   background: #9767ff;
   border-radius: 20px;
@@ -58,48 +116,3 @@
 .scrollbar-theme::-webkit-scrollbar-corner {
   background: #f1f1f1;
 }
-
- .grid__item {
-  display: flex;
-  align-items: center;
-  align-self: flex-start;
-  justify-content: center;
-  font-size: 16px;
-  margin: 10px;
-  overflow: visible;
-  min-width: 30px; 
-  min-height: 25px; 
-}
-
-.label-text {
-  display: inline-block;
-  text-align: center;
-  width: 100%;
-}
-
-.layout {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.editor-picker {
-  padding: 20px;
-  width: 350px;
-  background: #F9FBFC 0% 0% no-repeat padding-box;
-  box-shadow: 1px 1px 1px #00000029;
-  opacity: 1;
-  height: 100vh;
-  position: fixed; 
-  top: 0; 
-  right: 0; 
-}
-
-.btn-theme {
-  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-.btn-theme:hover {
-  box-shadow: 0px 4px 0px -2px rgba(50, 50, 93, 0.25), 0px 0px 0px 0px rgba(0, 0, 0, 0.3);
-  transform: scale(1.03);
-}
-
-
