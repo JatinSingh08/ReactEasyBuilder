@@ -1,6 +1,6 @@
 <div align="center"> 
  
-# Zenskar
+# Zenskar App builder
 ## An App builder for web 🛡️⚡
 </div>
 
