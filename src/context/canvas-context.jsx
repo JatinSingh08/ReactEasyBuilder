@@ -80,16 +80,54 @@ const CanvasProvider = ({children}) => {
   }
 
   const addElement = ({type}) => {
-    const newElement = {
+    let newElement = {
       i: `element-${state.elements.length + 1}`,
       x: 0,
       y: 0,
       w: getComponentWidth(type),
       h: getComponentHeight(type),
-      text: getDefaultText(type),
-      borderRadius: getDefaultBorderRadius(type),
+      // text: getDefaultText(type),
+      // borderRadius: getDefaultBorderRadius(type),
       component: type
     }
+
+    switch (type) {
+      case 'button':
+        newElement = {
+          ...newElement,
+          text: "Button",
+          borderRadius: 8,
+          bgColor: '#531bcb'
+        }
+        break;
+      case 'textInput':
+        newElement = {
+          ...newElement,
+          label: "Label",
+          placeholder: "Enter Placeholder"
+        }
+        break;
+      case 'dropdown': 
+        newElement = {
+          ...newElement,
+          label: "Select Version",
+          option_1: "Jatin is King developer",
+          option_2: "Learn everyday something new",
+          option_3: "Work hard"
+        }
+        break;
+      case 'table':
+        newElement = {
+          ...newElement,
+          heading_1: 'Name',
+          heading_2: 'Job',
+          heading_3: 'Employed'
+        }
+        break;
+      default:
+        break;
+    }
+
     dispatch({ type: ActionType.SET_COMPONENT_TYPE, payload: type})
     dispatch({ type: ActionType.ADD_ELEMENT, payload: newElement});
     saveElementsToLocalStorage([...elementsRef.current, newElement]);

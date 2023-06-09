@@ -4,7 +4,8 @@ import { ActionType } from '../constants';
 const initialState = {
   comopnentType: '',
   elements: JSON.parse(localStorage.getItem('canvasElements')) || [],
-  selectedElement: {}
+  selectedElement: null,
+  editorPicker: 'components'
 }
 const CanvasReducer = (state, action) => {
   switch (action.type) {
@@ -28,7 +29,11 @@ const CanvasReducer = (state, action) => {
         ...state,
         selectedElement: action.payload
       }
-
+    case ActionType.SET_EDITOR_PICKER: 
+      return {
+        ...state,
+        editorPicker: action.payload
+      }
   }
 }
 

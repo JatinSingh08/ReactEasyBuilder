@@ -1,6 +1,9 @@
 import { Card, Typography } from "@material-tailwind/react";
+
  
-const TABLE_HEAD = ["Name", "Job", "Employed", ""];
+export default function TableComponent({element}) {
+   
+const TABLE_HEAD = [element?.heading_1, element?.heading_2, element?.heading_3, ""];
  
 const TABLE_ROWS = [
   {
@@ -29,8 +32,6 @@ const TABLE_ROWS = [
     date: "04/10/21",
   },
 ];
- 
-export default function TableComponent() {
   return (
     <Card className="overflow-scroll h-full w-full bg-slate-100">
       <table className="w-full min-w-max table-auto text-left">

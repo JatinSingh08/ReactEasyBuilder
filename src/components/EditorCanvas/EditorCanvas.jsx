@@ -12,7 +12,11 @@ import { ActionType } from "../../reducers/constants";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const EditorCanvas = () => {
-  const { state: { elements, componentType }, dispatch, updateElementsPosition } = useCanvas();
+  const {
+    state: { elements, componentType },
+    dispatch,
+    updateElementsPosition,
+  } = useCanvas();
   const previousSizeRef = useRef({});
 
   const gridItemWidth = 25;
@@ -92,15 +96,15 @@ const EditorCanvas = () => {
 
   const elementClickHandler = (id) => {
     setShowGrid(false);
-    console.log('id', id);
-    console.log('elements', elements);
-    const selectedElement = elements.find(element => element.i === id);
-    console.log('selected Element', selectedElement);
-    dispatch({ type: ActionType.SELECT_ELEMENT, payload: selectedElement});
-  }
+    console.log("id", id);
+    console.log("elements", elements);
+    const selectedElement = elements.find((element) => element.i === id);
+    console.log("selected Element", selectedElement);
+    dispatch({ type: ActionType.SELECT_ELEMENT, payload: selectedElement });
+  };
 
   return (
-    <div className="editor-canvas scrollbar-theme" >
+    <div className="editor-canvas scrollbar-theme">
       {elements.length === 0 && (
         <h1 className="absolute top-[45%] left-[40%] text-center text-[#c2cdd1] text-2xl font-bold">
           Drag & drop components here.
@@ -110,7 +114,13 @@ const EditorCanvas = () => {
         className="layout"
         layouts={{ xxs: elements }}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: gridCols, md: gridCols, sm: gridCols, xs: gridCols, xxs: gridCols }}
+        cols={{
+          lg: gridCols,
+          md: gridCols,
+          sm: gridCols,
+          xs: gridCols,
+          xxs: gridCols,
+        }}
         isResizable={{
           x: true,
           y: componentType === "textInput" ? false : true,
@@ -125,7 +135,6 @@ const EditorCanvas = () => {
         onDrag={handleDrag}
         onResizeStart={handleResizeStart}
         onResizeStop={handleResizeStop}
-        
       >
         {elements.map((item) => (
           <div
@@ -143,10 +152,18 @@ const EditorCanvas = () => {
             }}
             onClick={() => elementClickHandler(item.i)}
           >
-            {item.component === "button" && <ButtonComponent />}
-            {item.component === "textInput" && <InputComponent />}
-            {item.component === "dropdown" && <DropdownComponent />}
-            {item.component === "table" && <TableComponent />}
+            {item.component === "button" && (
+              <ButtonComponent button element={item} />
+            )}
+            {item.component === "textInput" && (
+              <InputComponent input element={item} />
+            )}
+            {item.component === "dropdown" && (
+              <DropdownComponent dropdown element={item} />
+            )}
+            {item.component === "table" && (
+              <TableComponent table element={item} />
+            )}
           </div>
         ))}
       </ResponsiveGridLayout>

@@ -7,7 +7,8 @@ import { ActionType } from "./reducers/constants";
 const buttonTypes = ['button', 'input', 'dropdown', 'table'];
 const EditorPicker = (props) => {
   const { state ,dispatch, updateElement } = useCanvas();
-  const [editorPicker, setEditorPicker] = useState('components');
+
+  console.log('selected element', state.selectedElement);
   return (
     <div className="editor-picker flex flex-col gap-4 ">
       <div className="flex items-end justify-end w-full">
@@ -19,15 +20,15 @@ const EditorPicker = (props) => {
         </div>
         <div className="flex gap-6">
           <button className="text-[#707880] font-normal transition-all duration-75 ease-in-out hover:text-[#55606b] hover:font-medium"
-          onClick={() => setEditorPicker('components')}
+          onClick={() => dispatch({ type: ActionType.SET_EDITOR_PICKER, payload: 'components' })}
           >Components</button>
           <button className="text-[#707880] font-normal transition-all duration-75 ease-in-out hover:text-[#55606b] hover:font-medium"
-          onClick={() => setEditorPicker('properties')}
+          onClick={() => dispatch({ type: ActionType.SET_EDITOR_PICKER, payload: 'properties' })}
           >Properties</button>
 
         </div>
         {
-          editorPicker === 'components' ?
+          state.editorPicker === 'components' ?
           (
             <>
               <TextInput />
