@@ -11,6 +11,7 @@ import {
 } from "./components";
 import { useCanvas } from "./context/canvas-context";
 import { ActionType } from "./reducers/constants";
+import { Toaster } from "react-hot-toast";
 
 const EditorPicker = () => {
   const { state, dispatch, updateElement } = useCanvas();

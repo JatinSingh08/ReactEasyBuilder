@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const PropertiesPanel = ({ selectedElement, updateElement }) => {
   const [buttonInputs, setButtonInputs] = useState({
@@ -124,10 +125,17 @@ const PropertiesPanel = ({ selectedElement, updateElement }) => {
     return updatedElement;
   };
 
+  const notify = () =>
+    toast.success("Changes Applied", {
+      duration: 1200,
+      position: "top-center",
+    });
+
   const submitHandler = (e) => {
     e.preventDefault();
     const updatedElement = updateElementProperties();
     updateElement(updatedElement);
+    notify();
   };
 
   if (!selectedElement) {
