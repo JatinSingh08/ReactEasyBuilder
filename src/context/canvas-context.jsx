@@ -103,7 +103,7 @@ const CanvasProvider = ({children}) => {
           ...newElement,
           text: "Button",
           borderRadius: 8,
-          bgColor: '#531bcb'
+          bgColor: 'blue'
         }
         break;
       case 'textInput':
