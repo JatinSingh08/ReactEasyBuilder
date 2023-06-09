@@ -14,7 +14,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const EditorCanvas = () => {
   const {
-    state: { elements, componentType },
+    state: { elements },
     dispatch,
     updateElementsPosition,
   } = useCanvas();
@@ -121,10 +121,6 @@ const EditorCanvas = () => {
           sm: gridCols,
           xs: gridCols,
           xxs: gridCols,
-        }}
-        isResizable={{
-          x: true,
-          y: componentType === "textInput" ? false : true,
         }}
         preventCollision={false}
         rowHeight={gridItemHeight}
