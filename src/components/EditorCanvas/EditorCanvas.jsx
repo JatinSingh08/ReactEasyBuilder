@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
@@ -9,6 +9,7 @@ import InputComponent from "../CanvasComponents/InputComponent";
 import DropdownComponent from "../CanvasComponents/DropdownComponent";
 import TableComponent from "../CanvasComponents/TableComponent";
 import { ActionType } from "../../reducers/constants";
+
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const EditorCanvas = () => {
@@ -17,20 +18,19 @@ const EditorCanvas = () => {
     dispatch,
     updateElementsPosition,
   } = useCanvas();
+
   const previousSizeRef = useRef({});
+  const [showGrid, setShowGrid] = useState(false);
 
   const gridItemWidth = 25;
   const gridItemHeight = 25;
   const gridCols = 12;
-
-  const [showGrid, setShowGrid] = useState(false);
 
   const handleDragStart = () => {
     setShowGrid(true);
   };
 
   const handleDragStop = (layout, oldItem, newItem) => {
-
     const updatedElements = elements.map((element) => {
       const matchingLayout = layout.find((item) => item.i === element.i);
       if (matchingLayout) {
@@ -56,7 +56,7 @@ const EditorCanvas = () => {
   };
 
   const handleDrag = (layout) => {
-    dispatch({ type: ActionType.SET_EDITOR_PICKER, payload: 'properties'})
+    dispatch({ type: ActionType.SET_EDITOR_PICKER, payload: "properties" });
 
     const updatedElements = elements.map((element) => {
       const matchingLayout = layout.find((item) => item.i === element.i);
@@ -98,7 +98,7 @@ const EditorCanvas = () => {
   };
 
   const elementClickHandler = (id) => {
-    dispatch({ type: ActionType.SET_EDITOR_PICKER, payload: 'properties'});
+    dispatch({ type: ActionType.SET_EDITOR_PICKER, payload: "properties" });
     setShowGrid(false);
     const selectedElement = elements.find((element) => element.i === id);
     dispatch({ type: ActionType.SELECT_ELEMENT, payload: selectedElement });

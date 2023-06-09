@@ -2,7 +2,7 @@ import React from 'react'
 
 const SearchBar = () => {
   return (
-      <form class={`flex items-center  h-[40px] w-full `}>
+      <form class={`flex items-center h-[40px] w-full`} onSubmit={(e) => e.preventDefault()}>
           <div className="w-full relative">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -23,10 +23,6 @@ const SearchBar = () => {
                       placeholder="Search Components"
                       className="w-full py-2 pl-12 pr-4 border-none rounded-md outline-none "
                       name="searchValue"
-                      onChange={(e) => {
-                        applyFilters(e.target.name, e.target.value);
-                        e.target.value.trim().length > 0 && navigate("/productlist");
-                      }}
               />
 
             </div>

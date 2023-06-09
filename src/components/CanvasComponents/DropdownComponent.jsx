@@ -1,11 +1,11 @@
-import React from 'react';
-import { Select, Option } from '@material-tailwind/react';
+import React from "react";
+import { Select, Option } from "@material-tailwind/react";
 
-const DropdownComponent = ({element}) => {
+const DropdownComponent = ({ element }) => {
   return (
     <div className="w-full h-full flex items-center justify-center bg-slate-50">
       <Select label={element?.label} className="h-full z-50 w-full border-none">
-        <Option className='flex items-center justify-center bg-slate-50 m-auto w-full h-full'>
+        <Option className="flex items-center justify-center bg-slate-50 m-auto w-full h-full">
           <div className="flex items-center justify-center bg-slate-50 m-auto w-full h-full">
             <span className="label-text ">{element?.option_1}</span>
           </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineTable } from 'react-icons/ai'
 import { useCanvas } from "../../context/canvas-context";
 
-const Table = ({ type }) => {
+const Table = () => {
   const { addElement } = useCanvas();
   return (
     <div className="flex gap-4 border-b border-b-[#A0B8C789] py-4 cursor-pointer btn-theme"

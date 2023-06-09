@@ -1,138 +1,141 @@
 import React, { useEffect, useState } from "react";
-import { useCanvas } from "../../context/canvas-context";
 
 const PropertiesPanel = ({ selectedElement, updateElement }) => {
-  const [borderRadius, setBorderRadius] = useState(
-    selectedElement?.borderRadius
-  );
-  const [text, setText] = useState(selectedElement?.text);
-  const [bgColor, setBgColor] = useState(selectedElement?.bgColor);
+  const [buttonInputs, setButtonInputs] = useState({
+    text: selectedElement?.text,
+    borderRadius: selectedElement?.borderRadius,
+    bgColor: selectedElement?.bgColor,
+  });
+
   const [dropdownInputs, setDropdownInputs] = useState({
     label: selectedElement?.label,
     option_1: selectedElement?.option_1,
     option_2: selectedElement?.option_2,
-    option_3: selectedElement?.option_3
-  })
+    option_3: selectedElement?.option_3,
+  });
+
   const [textInputs, setTextInputs] = useState({
     label: selectedElement?.label,
-    placeholder: selectedElement?.placeholder
-  })
+    placeholder: selectedElement?.placeholder,
+  });
+
   const [tableInputs, setTableInputs] = useState({
     heading_1: selectedElement?.heading_1,
     heading_2: selectedElement?.heading_2,
-    heading_3: selectedElement?.heading_3
-  })
-
-  const handleBorderRadiusChange = (e) => {
-    const value = e.target.value;
-    setBorderRadius(value);
-  };
+    heading_3: selectedElement?.heading_3,
+  });
 
   const updateProperties = () => {
-    setText(selectedElement?.text || "");
-    setBorderRadius(selectedElement?.borderRadius);
-    setBgColor(selectedElement?.bgColor);
+    setButtonInputs({
+      text: selectedElement?.text,
+      borderRadius: selectedElement?.borderRadius,
+      bgColor: selectedElement?.bgColor,
+    });
     setDropdownInputs({
       label: selectedElement?.label,
       option_1: selectedElement?.option_1,
       option_2: selectedElement?.option_2,
-      option_3: selectedElement?.option_3
-    })
+      option_3: selectedElement?.option_3,
+    });
     setTextInputs({
       label: selectedElement?.label,
-      placeholder: selectedElement?.placeholder
-    })
+      placeholder: selectedElement?.placeholder,
+    });
     setTableInputs({
       heading_1: selectedElement?.heading_1,
       heading_2: selectedElement?.heading_2,
-      heading_3: selectedElement?.heading_3
-    })
-  }
-  useEffect(() => {
-  updateProperties();
-  }, [selectedElement])
-
-  const handleTextChange = (e) => {
-    const value = e.target.value;
-    setText(value);
+      heading_3: selectedElement?.heading_3,
+    });
   };
-  const handleBgColorChange = (e) => {
-    const value = e.target.value;
-    setBgColor(value);
-  }
+  useEffect(() => {
+    updateProperties();
+  }, [selectedElement]);
+
+  const handleButtonInputs = (e) => {
+    const { id, value } = e.target;
+    setButtonInputs((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
 
   const handleDropdownInputs = (e) => {
     const { id, value } = e.target;
     setDropdownInputs((prevState) => ({
       ...prevState,
-      [id]: value
+      [id]: value,
     }));
-  }
+  };
+
   const handleTextInputs = (e) => {
     const { id, value } = e.target;
     setTextInputs((prevState) => ({
       ...prevState,
-      [id]: value
-    }))
-  }
+      [id]: value,
+    }));
+  };
+
   const handleTableInputs = (e) => {
     const { id, value } = e.target;
     setTableInputs((prevState) => ({
       ...prevState,
-      [id]: value
-    }))
-  }
+      [id]: value,
+    }));
+  };
 
   const updateElementProperties = () => {
-    let updatedElement = {...selectedElement};
+    let updatedElement = { ...selectedElement };
     switch (selectedElement.component) {
-      case 'button':
+      case "button":
         updatedElement = {
           ...updatedElement,
-          text: text,
-          borderRadius: borderRadius,
-          bgColor: bgColor
-        }
+          text: buttonInputs.text,
+          borderRadius: buttonInputs.borderRadius,
+          bgColor: buttonInputs.bgColor,
+        };
         break;
-      case 'textInput':
+      case "textInput":
         updatedElement = {
           ...updatedElement,
           label: textInputs.label,
-          placeholder: textInputs.placeholder
-        }
+          placeholder: textInputs.placeholder,
+        };
         break;
-      case 'dropdown': 
-       updatedElement = {
+      case "dropdown":
+        updatedElement = {
           ...updatedElement,
           label: dropdownInputs.label,
           option_1: dropdownInputs.option_1,
           option_2: dropdownInputs.option_2,
-          option_3: dropdownInputs.option_3
-        }
+          option_3: dropdownInputs.option_3,
+        };
         break;
-      case 'table':
+      case "table":
         updatedElement = {
           ...updatedElement,
           heading_1: tableInputs.heading_1,
           heading_2: tableInputs.heading_2,
-          heading_3: tableInputs.heading_3
-        }
+          heading_3: tableInputs.heading_3,
+        };
         break;
       default:
         break;
     }
     return updatedElement;
-  }
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     const updatedElement = updateElementProperties();
     updateElement(updatedElement);
   };
 
-  if(!selectedElement) {
+  if (!selectedElement) {
     return (
-      <h1 className="flex items-center justify-center m-auto my-20 font-medium">Select an element to edit.</h1>
-    )
+      <h1 className="flex items-center justify-center m-auto my-20 font-medium">
+        Select an element to edit.
+      </h1>
+    );
   }
 
   return (
@@ -148,8 +151,8 @@ const PropertiesPanel = ({ selectedElement, updateElement }) => {
               id="text"
               className="bg-[#e9eef1] rounded-lg py-1 px-2 focus:outline-[#9767FF] placeholder:text-slate-400"
               placeholder="Enter Text"
-              value={text}
-              onChange={handleTextChange}
+              value={buttonInputs.text}
+              onChange={handleButtonInputs}
             />
           </div>
           <div className="grid grid-cols-2 items-center justify-center ">
@@ -161,8 +164,8 @@ const PropertiesPanel = ({ selectedElement, updateElement }) => {
               id="borderRadius"
               className="bg-[#e9eef1] rounded-lg py-1 px-2 focus:outline-[#9767FF] placeholder:text-slate-400"
               placeholder="Enter Radius"
-              value={borderRadius}
-              onChange={handleBorderRadiusChange}
+              value={buttonInputs.borderRadius}
+              onChange={handleButtonInputs}
             />
           </div>
           <div className="grid grid-cols-2 items-center justify-center ">
@@ -174,8 +177,8 @@ const PropertiesPanel = ({ selectedElement, updateElement }) => {
               id="bgColor"
               className="bg-[#e9eef1] rounded-lg py-1 px-2 focus:outline-[#9767FF] placeholder:text-slate-400"
               placeholder="Enter BgColor"
-              onChange={handleBgColorChange}
-              value={bgColor}
+              onChange={handleButtonInputs}
+              value={buttonInputs.bgColor}
             />
           </div>
         </>
@@ -264,9 +267,8 @@ const PropertiesPanel = ({ selectedElement, updateElement }) => {
             />
           </div>
         </>
-      )  : selectedElement.component === "table" ? (
+      ) : selectedElement.component === "table" ? (
         <>
-         
           <div className="grid grid-cols-2 items-center justify-center ">
             <label htmlFor="heading_1" className="text-start">
               Heading 1
@@ -306,12 +308,10 @@ const PropertiesPanel = ({ selectedElement, updateElement }) => {
               placeholder="Enter Heading 3"
             />
           </div>
-        
         </>
       ) : (
         ""
-      )
-      }
+      )}
 
       <button
         type="submit"

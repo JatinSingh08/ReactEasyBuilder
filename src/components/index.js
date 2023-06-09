@@ -1,9 +1,13 @@
-export { default as SearchBar } from './SearchBar/SearchBar.jsx';
-export { default as TextInput} from './TextInput/TextInput.jsx';
-export { default as Button } from './Button/Button.jsx';
-export { default as Dropdown } from './Dropdown/Dropdown.jsx';
-export { default as Table } from './Table/Table.jsx'
-export { default as EditorCanvas } from './EditorCanvas/EditorCanvas.jsx';
-export { default as Header } from './Header/Header.jsx';
-export { default as Settings } from './Settings/Settings.jsx';
-export { default as PropertiesPanel } from './PropertiesPanel/PropertiesPanel.jsx';
+export { default as SearchBar } from "./SearchBar/SearchBar.jsx";
+export { default as TextInput } from "./TextInput/TextInput.jsx";
+export { default as Button } from "./Button/Button.jsx";
+export { default as Dropdown } from "./Dropdown/Dropdown.jsx";
+export { default as Table } from "./Table/Table.jsx";
+export { default as EditorCanvas } from "./EditorCanvas/EditorCanvas.jsx";
+export { default as Header } from "./Header/Header.jsx";
+export { default as Settings } from "./Settings/Settings.jsx";
+export { default as PropertiesPanel } from "./PropertiesPanel/PropertiesPanel.jsx";
+// export { default as ButtonComponent } from "./CanvasComponents/ButtonComponent.jsx";
+// export { default as InputComponent } from "./CanvasComponents/InputComponent.jsx";
+// export { default as DropdownComponent } from "./CanvasComponents/DropdownComponent.jsx";
+// export { default as TableComponent } from "./CanvasComponents/TableComponent.jsx";
