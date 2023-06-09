@@ -7,7 +7,3 @@ export { default as EditorCanvas } from "./EditorCanvas/EditorCanvas.jsx";
 export { default as Header } from "./Header/Header.jsx";
 export { default as Settings } from "./Settings/Settings.jsx";
 export { default as PropertiesPanel } from "./PropertiesPanel/PropertiesPanel.jsx";
-// export { default as ButtonComponent } from "./CanvasComponents/ButtonComponent.jsx";
-// export { default as InputComponent } from "./CanvasComponents/InputComponent.jsx";
-// export { default as DropdownComponent } from "./CanvasComponents/DropdownComponent.jsx";
-// export { default as TableComponent } from "./CanvasComponents/TableComponent.jsx";

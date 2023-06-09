@@ -150,16 +150,16 @@ const EditorCanvas = () => {
             onClick={() => elementClickHandler(item.i)}
           >
             {item.component === "button" && (
-              <ButtonComponent button element={item} />
+              <ButtonComponent element={item} />
             )}
             {item.component === "textInput" && (
-              <InputComponent input element={item} />
+              <InputComponent element={item} />
             )}
             {item.component === "dropdown" && (
-              <DropdownComponent dropdown element={item} />
+              <DropdownComponent element={item} />
             )}
             {item.component === "table" && (
-              <TableComponent table element={item} />
+              <TableComponent element={item} />
             )}
           </div>
         ))}
