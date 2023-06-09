@@ -1,26 +1,36 @@
 import React from "react";
-import { Select, Option } from "@material-tailwind/react";
 
 const DropdownComponent = ({ element }) => {
   return (
-    <div className="w-full h-full flex items-center justify-center bg-slate-50">
-      <Select label={element?.label} className="h-full z-50 w-full border-none">
-        <Option className="flex items-center justify-center bg-slate-50 m-auto w-full h-full">
+    <div className="w-full h-full flex items-center justify-center bg-red-400 p-2 rounded-lg">
+      <select className="h-full z-50 w-full border-none bg-transparent focus:outline-none">
+        <option
+          className="flex items-center justify-center bg-slate-50 m-auto w-full h-full"
+          disabled
+          selected
+        >
           <div className="flex items-center justify-center bg-slate-50 m-auto w-full h-full">
-            <span className="label-text ">{element?.option_1}</span>
+            <span className="label-text">{element?.label}</span>
           </div>
-        </Option>
-        <Option>
+        </option>
+        <option className="flex items-center justify-center bg-slate-50 m-auto w-full h-full">
+          <div className="flex items-center justify-center bg-slate-50 m-auto w-full h-full">
+            <span className="label-text flex items-center justify-center text-center">
+              {element?.option_1}
+            </span>
+          </div>
+        </option>
+        <option>
           <div className="flex items-center justify-center bg-slate-50">
             <span className="label-text">{element?.option_2}</span>
           </div>
-        </Option>
-        <Option>
+        </option>
+        <option>
           <div className="flex items-center justify-center bg-slate-50">
             <span className="label-text">{element?.option_3}</span>
           </div>
-        </Option>
-      </Select>
+        </option>
+      </select>
     </div>
   );
 };

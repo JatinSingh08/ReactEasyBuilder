@@ -28,7 +28,7 @@ const CanvasProvider = ({ children }) => {
   const updateLocalStorage = () => {
     localStorage.setItem("canvasElements", JSON.stringify(state.elements));
   };
-  
+
   useEffect(() => {
     updateLocalStorage();
   }, [state.elements]);
@@ -53,6 +53,9 @@ const CanvasProvider = ({ children }) => {
         return 4;
         break;
       case "button":
+        return 2;
+        break;
+      case "dropdown":
         return 2;
         break;
       default:
@@ -90,10 +93,10 @@ const CanvasProvider = ({ children }) => {
       case "dropdown":
         newElement = {
           ...newElement,
-          label: "Select Version",
-          option_1: "Jatin is King developer",
-          option_2: "Learn everyday something new",
-          option_3: "Work hard",
+          label: "Dropdown",
+          option_1: "Option 1",
+          option_2: "Option 2",
+          option_3: "Option 3",
         };
         break;
       case "table":

@@ -9,7 +9,6 @@ html {
   height: 100%;
 }
 
-
 .App-header {
   height: 80px;
   width: calc(100% - 350px);
@@ -17,7 +16,7 @@ html {
   align-items: center;
   padding: 30px;
   font-size: calc(10px + 2vmin);
-  position: fixed; /* Added */
+  position: fixed; 
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 1px 0px 0px #fcfcfc03;
   opacity: 0.8;
