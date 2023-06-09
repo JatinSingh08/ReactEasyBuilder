@@ -2,7 +2,7 @@ import React from "react";
 
 const DropdownComponent = ({ element }) => {
   return (
-    <div className="w-full h-full flex items-center justify-center bg-red-400 p-2 rounded-lg">
+    <div className="w-full h-full flex items-center justify-center bg-red-400 p-2 rounded-lg hover:cursor-pointer">
       <select className="h-full z-50 w-full border-none bg-transparent focus:outline-none">
         <option
           className="flex items-center justify-center bg-slate-50 m-auto w-full h-full"
