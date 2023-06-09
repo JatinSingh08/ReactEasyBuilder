@@ -19,10 +19,11 @@ const EditorPicker = (props) => {
           <SearchBar />
         </div>
         <div className="flex gap-6">
-          <button className="text-[#707880] font-normal transition-all duration-75 ease-in-out hover:text-[#55606b] hover:font-medium"
-          onClick={() => dispatch({ type: ActionType.SET_EDITOR_PICKER, payload: 'components' })}
-          >Components</button>
-          <button className="text-[#707880] font-normal transition-all duration-75 ease-in-out hover:text-[#55606b] hover:font-medium"
+        <button className={`text-[#707880] font-normal ${state.editorPicker === 'components' ? 'text-blue-500 font-semibold' : 'hover:text-[#55606b]'}`}
+  onClick={() => dispatch({ type: ActionType.SET_EDITOR_PICKER, payload: 'components' })}
+>Components</button>
+
+          <button className={`text-[#707880] font-normal ${state.editorPicker === 'properties' ? 'text-blue-500 font-semibold' : 'hover:text-[#55606b]'}`}
           onClick={() => dispatch({ type: ActionType.SET_EDITOR_PICKER, payload: 'properties' })}
           >Properties</button>
 
@@ -31,6 +32,7 @@ const EditorPicker = (props) => {
           state.editorPicker === 'components' ?
           (
             <>
+            {/* component list  */}
               <TextInput />
               <Button />
               <Dropdown />

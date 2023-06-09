@@ -30,6 +30,7 @@ const EditorCanvas = () => {
   };
 
   const handleDragStop = (layout, oldItem, newItem) => {
+
     const updatedElements = elements.map((element) => {
       const matchingLayout = layout.find((item) => item.i === element.i);
       if (matchingLayout) {
@@ -55,6 +56,8 @@ const EditorCanvas = () => {
   };
 
   const handleDrag = (layout) => {
+    dispatch({ type: ActionType.SET_EDITOR_PICKER, payload: 'properties'})
+
     const updatedElements = elements.map((element) => {
       const matchingLayout = layout.find((item) => item.i === element.i);
       if (matchingLayout) {
@@ -95,11 +98,9 @@ const EditorCanvas = () => {
   };
 
   const elementClickHandler = (id) => {
+    dispatch({ type: ActionType.SET_EDITOR_PICKER, payload: 'properties'});
     setShowGrid(false);
-    console.log("id", id);
-    console.log("elements", elements);
     const selectedElement = elements.find((element) => element.i === id);
-    console.log("selected Element", selectedElement);
     dispatch({ type: ActionType.SELECT_ELEMENT, payload: selectedElement });
   };
 

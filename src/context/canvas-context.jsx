@@ -20,6 +20,14 @@ const CanvasProvider = ({children}) => {
     saveElementsToLocalStorage(elementsRef.current);
   }, [elementsRef.current]);
 
+
+  const updateLocalStorage = () => {
+    localStorage.setItem('canvasElements', JSON.stringify(state.elements));
+  }
+  useEffect(() => {
+    updateLocalStorage();
+  } ,[state.elements])
+
   const getComponentWidth = ( type ) => {
     switch (type) {
       case 'textInput':
@@ -86,8 +94,6 @@ const CanvasProvider = ({children}) => {
       y: 0,
       w: getComponentWidth(type),
       h: getComponentHeight(type),
-      // text: getDefaultText(type),
-      // borderRadius: getDefaultBorderRadius(type),
       component: type
     }
 
