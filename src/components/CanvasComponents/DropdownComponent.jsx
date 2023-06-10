@@ -3,7 +3,7 @@ import React from "react";
 const DropdownComponent = ({ element }) => {
   return (
     <div className="w-full h-full flex items-center justify-center bg-red-400 p-2 rounded-lg hover:cursor-pointer">
-      <select className="h-full z-50 w-full border-none bg-transparent focus:outline-none">
+      <select className="h-full z-50 w-full border-none bg-transparent focus:outline-none hover:cursor-pointer">
         <option
           className="flex items-center justify-center bg-slate-50 m-auto w-full h-full"
           disabled
@@ -20,12 +20,12 @@ const DropdownComponent = ({ element }) => {
             </span>
           </div>
         </option>
-        <option>
+        <option className="flex items-center justify-center bg-slate-50 m-auto w-full h-full">
           <div className="flex items-center justify-center bg-slate-50">
             <span className="label-text">{element?.option_2}</span>
           </div>
         </option>
-        <option>
+        <option className="flex items-center justify-center bg-slate-50 m-auto w-full h-full">
           <div className="flex items-center justify-center bg-slate-50">
             <span className="label-text">{element?.option_3}</span>
           </div>

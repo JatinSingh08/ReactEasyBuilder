@@ -9,7 +9,7 @@ const ButtonComponent = ({ element }) => {
   };
   return (
     <button
-      className={`text-slate-50 font-semibold tracking-wider w-full h-full`}
+      className={`text-slate-50 font-semibold tracking-wider w-full h-full hover:cursor-pointer`}
       style={buttonStyle}
     >
       {element.text}

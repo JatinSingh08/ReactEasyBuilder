@@ -36,7 +36,7 @@ export default function TableComponent({ element }) {
     },
   ];
   return (
-    <Card className="overflow-scroll h-full w-full bg-slate-100">
+    <Card className="overflow-scroll h-full w-full bg-slate-100 cursor-pointer">
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
