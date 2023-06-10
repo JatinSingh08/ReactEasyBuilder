@@ -48,6 +48,7 @@ const PropertiesPanel = ({ selectedElement, updateElement }) => {
       heading_3: selectedElement?.heading_3,
     });
   };
+  
   useEffect(() => {
     updateProperties();
   }, [selectedElement]);
@@ -88,35 +89,36 @@ const PropertiesPanel = ({ selectedElement, updateElement }) => {
     let updatedElement = { ...selectedElement };
     switch (selectedElement.component) {
       case "button":
+        const parsedBorderRadius = parseInt(buttonInputs.borderRadius);
         updatedElement = {
           ...updatedElement,
-          text: buttonInputs.text,
-          borderRadius: buttonInputs.borderRadius,
-          bgColor: buttonInputs.bgColor,
+          text: buttonInputs.text.trim().length > 0 ? buttonInputs.text : "Button",
+          borderRadius: isNaN(parsedBorderRadius) ? 8 : parsedBorderRadius,
+          bgColor: buttonInputs.bgColor.trim().length > 0 ? buttonInputs.bgColor : "blue",
         };
         break;
       case "textInput":
         updatedElement = {
           ...updatedElement,
-          label: textInputs.label,
-          placeholder: textInputs.placeholder,
+          label: textInputs.label.trim().length > 0 ? textInputs.label : "Label",
+          placeholder: textInputs.placeholder.trim().length > 0 ? textInputs.placeholder : "Enter Placeholder",
         };
         break;
       case "dropdown":
         updatedElement = {
           ...updatedElement,
-          label: dropdownInputs.label,
-          option_1: dropdownInputs.option_1,
-          option_2: dropdownInputs.option_2,
-          option_3: dropdownInputs.option_3,
+          label: dropdownInputs.label.trim().length > 0 ? dropdownInputs.label : "Dropdown",
+          option_1: dropdownInputs.option_1.trim().length > 0 ? dropdownInputs.option_1 : "Option 1",
+          option_2: dropdownInputs.option_2.trim().length > 0 ? dropdownInputs.option_2 : "Option 2",
+          option_3: dropdownInputs.option_3.trim().length > 0 ? dropdownInputs.option_3 : "Option 3",
         };
         break;
       case "table":
         updatedElement = {
           ...updatedElement,
-          heading_1: tableInputs.heading_1,
-          heading_2: tableInputs.heading_2,
-          heading_3: tableInputs.heading_3,
+          heading_1: tableInputs.heading_1.trim().length > 0 ? tableInputs.heading_1 : "Name",
+          heading_2: tableInputs.heading_2.trim().length > 0 ? tableInputs.heading_2 : "Job",
+          heading_3: tableInputs.heading_3.trim().length > 0 ? tableInputs.heading_3 : "Employed",
         };
         break;
       default:
@@ -135,6 +137,7 @@ const PropertiesPanel = ({ selectedElement, updateElement }) => {
     e.preventDefault();
     const updatedElement = updateElementProperties();
     updateElement(updatedElement);
+    // updateProperties();
     notify();
   };
 
