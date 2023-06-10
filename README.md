@@ -14,6 +14,8 @@
 - Edit properties of Components on drag & click 
 - Persisting positions & properties on browser 
 - Making space for Component on drag 
+- Components accessible at Smaller screen
+- Toast on applying changes to component
 
 ## **Built with -**
 
