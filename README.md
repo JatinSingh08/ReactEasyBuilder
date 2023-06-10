@@ -1,6 +1,6 @@
 <div align="center"> 
  
-# Zenskar App builder
+# App builder
 ## An App builder for web 🛡️⚡
 </div>
 
@@ -24,3 +24,7 @@
 - Tailwind css
 
 ## **Demo -**
+
+
+https://github.com/JatinSingh08/zenskar-app-builder/assets/97881261/ca1ff5fa-37aa-4724-b16c-8e159f37b0ec
+
