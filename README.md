@@ -1,6 +1,6 @@
 <div align="center"> 
  
-# App builder
+# ReactEasyBuilder
 ## An App builder for web 🛡️⚡
 </div>
 
